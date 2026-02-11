@@ -1,0 +1,35 @@
+.odometer-container {
+  display: inline-flex;
+  white-space: pre;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+  vertical-align: bottom;
+}
+
+.odometer-digit-box {
+  display: inline-block;
+  height: 1.1em;
+  /* Should match line-height */
+  overflow: hidden;
+  position: relative;
+}
+
+.odometer-ribbon {
+  display: flex;
+  flex-direction: column;
+  will-change: transform;
+}
+
+.odometer-char {
+  height: 1.1em;
+  /* Match container height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.odometer-static {
+  display: inline-block;
+  height: 1.1em;
+  line-height: 1.1;
+}
