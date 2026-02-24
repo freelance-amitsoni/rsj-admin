@@ -3,6 +3,19 @@
   white-space: pre;
   font-variant-numeric: tabular-nums;
   line-height: 1.1;
+  font-size: 1.75rem;
+}
+
+@media (min-width: 640px) {
+  .odometer-container {
+    font-size: 2rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .odometer-container {
+    font-size: 2.5rem;
+  }
 }
 
 .odometer-digit-box {

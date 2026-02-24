@@ -31,7 +31,19 @@ body {
   justify-content: center;
   min-width: 320px;
   min-height: 100vh;
-  padding-top: 2rem;
+  padding-top: 0.5rem;
+}
+
+@media (min-width: 640px) {
+  body {
+    padding-top: 1rem;
+  }
+}
+
+@media (min-width: 768px) {
+  body {
+    padding-top: 2rem;
+  }
 }
 
 h1,
