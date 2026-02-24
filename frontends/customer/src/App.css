@@ -219,7 +219,7 @@
 }
 
 .subtitle {
-  color: var(--text-secondary);
+  color: white;
   font-size: 0.9rem;
   margin: 0;
 }
@@ -233,6 +233,67 @@
 @media (min-width: 768px) {
   .subtitle {
     font-size: 1.25rem;
+  }
+}
+
+.toggle-rough-estimate-btn {
+  background: linear-gradient(135deg, #fbbf24, #d97706);
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(251, 191, 36, 0.3);
+}
+
+.toggle-rough-estimate-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(251, 191, 36, 0.4);
+}
+
+.toggle-rough-estimate-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(251, 191, 36, 0.3);
+}
+
+@media (min-width: 640px) {
+  .toggle-rough-estimate-btn {
+    font-size: 0.95rem;
+    padding: 0.7rem 1.4rem;
+  }
+}
+
+.card-estimate-btn {
+  background: linear-gradient(135deg, #fbbf24, #d97706);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+  align-self: flex-end;
+}
+
+.card-estimate-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(251, 191, 36, 0.3);
+}
+
+.card-estimate-btn:active {
+  transform: translateY(0);
+}
+
+@media (min-width: 640px) {
+  .card-estimate-btn {
+    font-size: 0.85rem;
+    padding: 0.55rem 1.1rem;
   }
 }
 
@@ -341,15 +402,17 @@
 
 .card-header {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   margin-bottom: 0.75rem;
   gap: 0.5rem;
+  flex-wrap: wrap;
 }
 
 @media (min-width: 768px) {
   .card-header {
     margin-bottom: 1rem;
+    flex-wrap: nowrap;
   }
 }
 
@@ -357,6 +420,9 @@
   font-size: 1.75rem;
   color: var(--text-primary);
   font-weight: 600;
+  flex-grow: 1;
+  flex-shrink: 1;
+  min-width: 0;
 }
 
 @media (min-width: 640px) {
@@ -377,6 +443,8 @@
   border-radius: 9999px;
   background: rgba(0, 0, 0, 0.05);
   color: var(--text-secondary);
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 @media (min-width: 640px) {

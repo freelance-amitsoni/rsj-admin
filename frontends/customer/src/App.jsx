@@ -9,6 +9,8 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [showGold22RoughEstimate, setShowGold22RoughEstimate] = useState(false);
+  const [showGold18RoughEstimate, setShowGold18RoughEstimate] = useState(false);
 
   const toggleFullscreen = () => {
     if (!document.fullscreenElement) {
@@ -86,8 +88,8 @@ function App() {
   // State for making charges per metal type
   const [makingCharges, setMakingCharges] = useState({
     gold24: 2,
-    gold22: 7,
-    gold18: 7,
+    gold22: 12,
+    gold18: 12,
     silver: 10
   });
 
@@ -229,10 +231,67 @@ function App() {
                   <span className="rate-label">Buy (10gm)</span>
                   <span className="rate-value">₹ <AnimatedRate value={rates.gold22.sellRate} /></span>
                 </div>
+                {showGold22RoughEstimate && <div className="calc-result">
+                  <h3 className="calc-title">Rough Estimate</h3>
+                  <div className="input-group">
+                    <label className="input-label">Weight</label>
+                    <div className="input-with-suffix">
+                      <input
+                        type="number"
+                        className="calc-input"
+                        value={weights.gold22}
+                        onChange={(e) => handleWeightChange('gold22', e.target.value)}
+                        onFocus={(e) => e.target.select()}
+                      />
+                      <span className="suffix">gm</span>
+                    </div>
+                  </div>
+                  <div className="input-group">
+                    <label className="input-label">Making Charges</label>
+                    <div className="input-with-suffix">
+                      <input
+                        type="number"
+                        className="calc-input"
+                        value={makingCharges.gold22}
+                        onChange={(e) => handleMakingChange('gold22', e.target.value)}
+                        onFocus={(e) => e.target.select()}
+                      />
+                      <span className="suffix">%</span>
+                    </div>
+                  </div>
+                  {(() => {
+                    const calc = calculatePrice(rates.gold22.purchaseRate, makingCharges.gold22, weights.gold22);
+                    return (
+                      <>
+                        <div className="calc-row">
+                          <span>Gold Value</span>
+                          <span>₹ {calc.basePrice.toLocaleString()}</span>
+                        </div>
+                        <div className="calc-row">
+                          <span>Making Charges</span>
+                          <span>₹ {Math.round(calc.makingChargesTotal).toLocaleString()}</span>
+                        </div>
+                        <div className="calc-row">
+                          <span>GST (3%)</span>
+                          <span>₹ {Math.round(calc.gst).toLocaleString()}</span>
+                        </div>
+                        <div className="calc-row calc-total">
+                          <span>Total<sub>(Approx)</sub></span>
+                          <span>₹ {Math.round(calc.total).toLocaleString()}</span>
+                        </div>
+                      </>
+                    );
+                  })()}
+                </div>}
               </div>
+              <button
+                onClick={() => setShowGold22RoughEstimate(!showGold22RoughEstimate)}
+                className="card-estimate-btn"
+                title="Toggle rough estimate"
+              >
+                {showGold22RoughEstimate ? 'Hide' : 'Show'} Estimate
+              </button>
             </div>
-
-            {/* Row 2: 18K Gold */}
             <div className="rate-card card-gold18">
               <div className="card-header">
                 <h2 className="card-title">18K Gold</h2>
@@ -247,7 +306,66 @@ function App() {
                   <span className="rate-label">Buy (10gm)</span>
                   <span className="rate-value">₹ <AnimatedRate value={rates.gold18.sellRate} /></span>
                 </div>
+                {showGold18RoughEstimate && <div className="calc-result">
+                  <h3 className="calc-title">Rough Estimate</h3>
+                  <div className="input-group">
+                    <label className="input-label">Weight</label>
+                    <div className="input-with-suffix">
+                      <input
+                        type="number"
+                        className="calc-input"
+                        value={weights.gold18}
+                        onChange={(e) => handleWeightChange('gold18', e.target.value)}
+                        onFocus={(e) => e.target.select()}
+                      />
+                      <span className="suffix">gm</span>
+                    </div>
+                  </div>
+                  <div className="input-group">
+                    <label className="input-label">Making Charges</label>
+                    <div className="input-with-suffix">
+                      <input
+                        type="number"
+                        className="calc-input"
+                        value={makingCharges.gold18}
+                        onChange={(e) => handleMakingChange('gold18', e.target.value)}
+                        onFocus={(e) => e.target.select()}
+                      />
+                      <span className="suffix">%</span>
+                    </div>
+                  </div>
+                  {(() => {
+                    const calc = calculatePrice(rates.gold18.purchaseRate, makingCharges.gold18, weights.gold18);
+                    return (
+                      <>
+                        <div className="calc-row">
+                          <span>Gold Value</span>
+                          <span>₹ {calc.basePrice.toLocaleString()}</span>
+                        </div>
+                        <div className="calc-row">
+                          <span>Making Charges</span>
+                          <span>₹ {Math.round(calc.makingChargesTotal).toLocaleString()}</span>
+                        </div>
+                        <div className="calc-row">
+                          <span>GST (3%)</span>
+                          <span>₹ {Math.round(calc.gst).toLocaleString()}</span>
+                        </div>
+                        <div className="calc-row calc-total">
+                          <span>Total<sub>(Approx)</sub></span>
+                          <span>₹ {Math.round(calc.total).toLocaleString()}</span>
+                        </div>
+                      </>
+                    );
+                  })()}
+                </div>}
               </div>
+              <button
+                onClick={() => setShowGold18RoughEstimate(!showGold18RoughEstimate)}
+                className="card-estimate-btn"
+                title="Toggle rough estimate"
+              >
+                {showGold18RoughEstimate ? 'Hide' : 'Show'} Estimate
+              </button>
             </div>
           </div>
         </div>
