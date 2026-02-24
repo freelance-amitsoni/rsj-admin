@@ -74,76 +74,77 @@
   margin-top: 64px;
 }
 
-.login-container {
-  min-height: calc(100vh - 64px);
-}
-
 .container {
-  max-width: 1200px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
   margin: 0 auto;
-  margin: 0 auto;
-  padding: 1rem;
+  padding: 2rem 1rem;
   width: 100%;
 }
 
 @media (min-width: 768px) {
   .container {
-    padding: 2rem;
+    padding: 3rem 2rem;
   }
+}
+
+.login-container {
+  min-height: calc(100vh - 64px);
 }
 
 .header {
   text-align: center;
-  margin-bottom: 1rem;
-  /* Reduced from 3rem */
-  padding-top: 1rem;
-  /* Added space to clear Navbar completely */
+  margin-bottom: 1.5rem;
+  padding-top: 0;
 }
 
 .title {
-  font-size: 2rem;
+  font-size: 2.5rem;
   background: linear-gradient(to right, #fbbf24, #d97706);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   margin-bottom: 0.25rem;
-  /* Reduced from 0.5rem */
 }
 
 @media (min-width: 768px) {
   .title {
-    font-size: 3rem;
+    font-size: 3.5rem;
   }
 }
 
 .subtitle {
   color: var(--text-secondary);
-  font-size: 1.1rem;
+  font-size: 1.25rem;
   margin: 0;
+}
+
+.rates-layout-container {
+  height: max-content;
 }
 
 .rates-layout {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 2rem;
-  align-items: start;
-}
-
-.rates-col {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: max-content;
+  gap: 3rem;
+  align-items: stretch;
+  height: 100%;
 }
 
 @media (max-width: 1024px) {
   .rates-layout {
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .rates-layout {
     grid-template-columns: 1fr;
+    gap: 2rem;
   }
 }
 
@@ -151,17 +152,19 @@
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(0, 0, 0, 0.05);
-  border-radius: 16px;
-  border-radius: 16px;
+  border-radius: 20px;
   padding: 1.5rem;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   position: relative;
   overflow: hidden;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  height: max-content;
 }
 
 .rate-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-8px);
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
   border-color: rgba(251, 191, 36, 0.5);
 }
@@ -199,29 +202,18 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  justify-content: space-between;
-  align-items: center;
   margin-bottom: 1rem;
 }
 
-@media (min-width: 768px) {
-  .rate-card {
-    padding: 2rem;
-  }
-
-  .card-header {
-    margin-bottom: 1.5rem;
-  }
-}
-
 .card-title {
-  font-size: 1.5rem;
+  font-size: 2.5rem;
   color: var(--text-primary);
+  font-weight: 600;
 }
 
 .badge {
-  font-size: 0.8rem;
-  padding: 0.25rem 0.75rem;
+  font-size: 1rem;
+  padding: 0.4rem 1rem;
   border-radius: 9999px;
   background: rgba(0, 0, 0, 0.05);
   color: var(--text-secondary);
@@ -231,9 +223,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.05);
 }
 
 .input-group {
@@ -344,13 +336,14 @@
 
 .rate-label {
   color: var(--text-secondary);
-  font-size: 0.9rem;
+  font-size: 1.2rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
+  margin-right: 2rem;
 }
 
 .rate-value {
-  font-size: 1.5rem;
+  font-size: 2.5rem;
   font-weight: 700;
   color: var(--text-primary);
 }
@@ -406,11 +399,10 @@
 /* Offer Banner Styles */
 .offer-banner {
   background: linear-gradient(135deg, #b91c1c 0%, #ef4444 100%);
-  /* Vibrant Red for Offer */
   color: white;
-  padding: 1rem;
+  padding: 0.75rem 1rem;
   border-radius: 12px;
-  margin-top: 1rem;
+  margin-bottom: 1rem;
   box-shadow: 0 10px 15px -3px rgba(185, 28, 28, 0.3);
   display: flex;
   justify-content: center;
