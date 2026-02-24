@@ -38,7 +38,7 @@ function App() {
     fetchRates();
 
     // Connect to Socket.io server
-    const socket = io(import.meta.env.VITE_API_URL || 'https://rsj-admin.onrender.com/');
+    const socket = io(import.meta.env.VITE_API_URL || 'https://rsj-admin.onrender.com');
 
     socket.on('connect', () => {
       console.log('Connected to socket server');
@@ -70,7 +70,7 @@ function App() {
 
   const fetchRates = async () => {
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL || 'https://rsj-admin.onrender.com/'}/api/rates`);
+      const response = await fetch(`${import.meta.env.VITE_API_URL || 'https://rsj-admin.onrender.com'}/api/rates`);
       if (!response.ok) {
         throw new Error('Failed to fetch rates');
       }

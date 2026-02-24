@@ -24,7 +24,7 @@ function App() {
 
   const fetchCurrentRates = async () => {
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL || 'https://rsj-admin.onrender.com/'}/api/rates`);
+      const res = await fetch(`${import.meta.env.VITE_API_URL || 'https://rsj-admin.onrender.com'}/api/rates`);
       if (res.ok) {
         const data = await res.json();
         if (data && data.gold24) {
@@ -47,7 +47,7 @@ function App() {
     setLoading(true);
 
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL || 'https://rsj-admin.onrender.com/'}/api/auth/login`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL || 'https://rsj-admin.onrender.com'}/api/auth/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -92,7 +92,7 @@ function App() {
     setLoading(true);
 
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL || 'https://rsj-admin.onrender.com/'}/api/rates`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL || 'https://rsj-admin.onrender.com'}/api/rates`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
