@@ -8,6 +8,31 @@ function App() {
   const [rates, setRates] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [isFullscreen, setIsFullscreen] = useState(false);
+
+  const toggleFullscreen = () => {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen().then(() => {
+        setIsFullscreen(true);
+      }).catch(err => {
+        console.error(`Error attempting to enable fullscreen: ${err.message}`);
+      });
+    } else {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+        setIsFullscreen(false);
+      }
+    }
+  };
+
+  useEffect(() => {
+    const handleFullscreenChange = () => {
+      setIsFullscreen(!!document.fullscreenElement);
+    };
+
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+    return () => document.removeEventListener('fullscreenchange', handleFullscreenChange);
+  }, []);
 
   useEffect(() => {
     fetchRates();
@@ -61,8 +86,8 @@ function App() {
   // State for making charges per metal type
   const [makingCharges, setMakingCharges] = useState({
     gold24: 2,
-    gold22: 12,
-    gold18: 12,
+    gold22: 7,
+    gold18: 7,
     silver: 10
   });
 
@@ -124,6 +149,17 @@ function App() {
           Rani Sati Jewellers, Katras
         </a>
         <div className="navbar-right">
+          <button onClick={toggleFullscreen} className="fullscreen-btn" aria-label="Toggle Fullscreen">
+            {isFullscreen ? (
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3"></path>
+              </svg>
+            ) : (
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
+              </svg>
+            )}
+          </button>
           <span className="bis-label">BIS Hallmarked</span>
           <img
             src="/bis_logo.png"
@@ -133,6 +169,16 @@ function App() {
         </div>
       </nav>
       <div className="container">
+        {/* Offer Banner */}
+        <div className="offer-banner">
+          <div className="offer-content">
+            <span className="offer-badge">Limited Time</span>
+            <span className="offer-text">
+              ✨ Making Charges Starting From Just <strong>7%</strong> !
+            </span>
+          </div>
+        </div>
+
         <header className="header">
           <h1 className="title">Today's Live Rates</h1>
           <p className="subtitle">Real-time Gold & Silver Rates</p>
@@ -148,10 +194,10 @@ function App() {
                 <span className="badge">99.9% Purity</span>
               </div>
               <div className="rate-details">
-                <div className="rate-row">
+                {/* <div className="rate-row">
                   <span className="rate-label">Buy (10gm)</span>
                   <span className="rate-value">₹ <AnimatedRate value={rates.gold24.sellRate} /></span>
-                </div>
+                </div> */}
                 <div className="rate-row">
                   <span className="rate-label">Sell (10gm)</span>
                   <span className="rate-value">₹ <AnimatedRate value={rates.gold24.purchaseRate} /></span>
@@ -166,10 +212,10 @@ function App() {
                 <span className="badge">Fine Silver</span>
               </div>
               <div className="rate-details">
-                <div className="rate-row">
+                {/* <div className="rate-row">
                   <span className="rate-label">Buy (10gm)</span>
                   <span className="rate-value">₹ <AnimatedRate value={rates.silver.sellRate} /></span>
-                </div>
+                </div> */}
                 <div className="rate-row">
                   <span className="rate-label">Sell (10gm)</span>
                   <span className="rate-value">₹ <AnimatedRate value={rates.silver.purchaseRate} /></span>
@@ -187,12 +233,12 @@ function App() {
               </div>
               <div className="rate-details">
                 <div className="rate-row">
-                  <span className="rate-label">Buy (10gm)</span>
-                  <span className="rate-value">₹ <AnimatedRate value={rates.gold22.sellRate} /></span>
-                </div>
-                <div className="rate-row">
                   <span className="rate-label">Sell (10gm)</span>
                   <span className="rate-value">₹ <AnimatedRate value={rates.gold22.purchaseRate} /></span>
+                </div>
+                <div className="rate-row">
+                  <span className="rate-label">Buy (10gm)</span>
+                  <span className="rate-value">₹ <AnimatedRate value={rates.gold22.sellRate} /></span>
                 </div>
                 <div className="calc-result">
                   <h3 className="calc-title">Rough Estimate</h3>
@@ -223,7 +269,7 @@ function App() {
                     </div>
                   </div>
                   {(() => {
-                    const calc = calculatePrice(rates.gold22.sellRate, makingCharges.gold22, weights.gold22);
+                    const calc = calculatePrice(rates.gold22.purchaseRate, makingCharges.gold22, weights.gold22);
                     return (
                       <>
                         <div className="calc-row">
@@ -259,12 +305,12 @@ function App() {
               </div>
               <div className="rate-details">
                 <div className="rate-row">
-                  <span className="rate-label">Buy (10gm)</span>
-                  <span className="rate-value">₹ <AnimatedRate value={rates.gold18.sellRate} /></span>
-                </div>
-                <div className="rate-row">
                   <span className="rate-label">Sell (10gm)</span>
                   <span className="rate-value">₹ <AnimatedRate value={rates.gold18.purchaseRate} /></span>
+                </div>
+                <div className="rate-row">
+                  <span className="rate-label">Buy (10gm)</span>
+                  <span className="rate-value">₹ <AnimatedRate value={rates.gold18.sellRate} /></span>
                 </div>
 
                 <div className="calc-result">
@@ -296,7 +342,7 @@ function App() {
                     </div>
                   </div>
                   {(() => {
-                    const calc = calculatePrice(rates.gold18.sellRate, makingCharges.gold18, weights.gold18);
+                    const calc = calculatePrice(rates.gold18.purchaseRate, makingCharges.gold18, weights.gold18);
                     return (
                       <>
                         <div className="calc-row">

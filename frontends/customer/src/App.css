@@ -44,6 +44,25 @@
   }
 }
 
+.fullscreen-btn {
+  background: transparent;
+  border: none;
+  border-radius: 50%;
+  padding: 8px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-right: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fullscreen-btn:hover {
+  background: rgba(0, 0, 0, 0.05);
+  color: var(--text-primary);
+}
+
 .navbar-logo {
   height: 48px;
   width: auto;
@@ -75,9 +94,9 @@
 
 .header {
   text-align: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   /* Reduced from 3rem */
-  padding-top: 2rem;
+  padding-top: 1rem;
   /* Added space to clear Navbar completely */
 }
 
@@ -100,6 +119,7 @@
 .subtitle {
   color: var(--text-secondary);
   font-size: 1.1rem;
+  margin: 0;
 }
 
 .rates-layout {
@@ -380,5 +400,106 @@
 
   .bis-logo {
     height: 32px;
+  }
+}
+
+/* Offer Banner Styles */
+.offer-banner {
+  background: linear-gradient(135deg, #b91c1c 0%, #ef4444 100%);
+  /* Vibrant Red for Offer */
+  color: white;
+  padding: 1rem;
+  border-radius: 12px;
+  margin-top: 1rem;
+  box-shadow: 0 10px 15px -3px rgba(185, 28, 28, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  animation: slideDown 0.5s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.offer-content {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  z-index: 1;
+}
+
+.offer-badge {
+  background: #fbbf24;
+  /* Gold badge */
+  color: #78350f;
+  /* Dark brown text */
+  padding: 0.25rem 0.8rem;
+  border-radius: 9999px;
+  font-size: 0.8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.05);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.offer-text {
+  font-size: 1.05rem;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0.3px;
+}
+
+.offer-text strong {
+  font-weight: 800;
+  color: #fef3c7;
+  /* Light gold/yellow */
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 640px) {
+  .offer-banner {
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .offer-badge {
+    font-size: 0.7rem;
+    padding: 0.2rem 0.6rem;
+  }
+
+  .offer-text {
+    font-size: 0.9rem;
   }
 }
